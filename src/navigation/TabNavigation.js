@@ -3,15 +3,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-import HomeScreen from '../HomeScreen'
-import OrderScreen from '../OrderScreen'
-import ProductScreen from '../ProductScreen'
-import StoreScreen from '../StoreScreen'
+import HomeScreen from '../screen/HomeScreen'
+import OrderScreen from '../screen/OrderScreen'
+import ProductScreen from '../screen/ProductScreen'
+import StoreScreen from '../screen/StoreScreen'
 
 const Tab = createBottomTabNavigator();
 const TabStack = createStackNavigator();
 
-export default function Navigation() {
+export default function TabNavigation() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
