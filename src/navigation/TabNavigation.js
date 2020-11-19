@@ -72,7 +72,7 @@ function ProductNavigator() {
   return (
     <TabStack.Navigator>
       <TabStack.Screen
-        name="School"
+        name="product"
         component={ ProductScreen }
         options={{
           headerTitle: '产品',
@@ -88,7 +88,7 @@ function StoreScreenNavigator() {
   return (
     <TabStack.Navigator>
       <TabStack.Screen
-        name="School"
+        name="store"
         component={ StoreScreen }
         options={{
           headerTitle: '商店',
