@@ -8,7 +8,7 @@ const LoginScreen = ({navigation})=> {
       <Button 
         type="primary"
         onPress={()=>{
-          navigation.navigate('TabNav');
+          navigation.navigate('Home');
         }} 
       >
         登录
