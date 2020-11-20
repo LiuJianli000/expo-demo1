@@ -28,6 +28,8 @@
 
 #### 版本
 
+[expo | docs](https://docs.expo.io/)
+
 expo-cli：`3.28.4`
 
 node： `12.16.3`
@@ -49,3 +51,7 @@ yarn：`1.22.4`
 #### UI 框架
 
 `@ant-design/react-native`
+
+#### Storage
+
+[AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage)
