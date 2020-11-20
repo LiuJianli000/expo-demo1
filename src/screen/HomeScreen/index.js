@@ -25,15 +25,15 @@ class HomeScreen extends Component {
           change name
         </Button>
         <Button
-          onPress={() => this.props.dispatch({
-            type: 'home/asyncOp',
-            payload: {
-              name: 'async name'
-            }
-          })}
+          onPress={() => {
+            this.props.dispatch({
+              type: 'home/fetch',
+            })
+          }}
         >
-          async change
+          fetch list
         </Button>
+        <Text>{JSON.stringify(this.props.list)}</Text>
         <Button
           onPress={() => {
             AsyncStorage.setItem('sex', 'man')
@@ -65,5 +65,6 @@ class HomeScreen extends Component {
 }
  
 export default connect(state => ({
-  name: state.home.name
+  name: state.home.name,
+  list: state.home.list
 }))(HomeScreen)
