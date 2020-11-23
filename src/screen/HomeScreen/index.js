@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
- 
+
+@connect(state => ({
+  name: state.home.name,
+  list: state.home.list
+}))
 class HomeScreen extends Component {
   state = {
     sex: ''
@@ -64,7 +68,4 @@ class HomeScreen extends Component {
   }
 }
  
-export default connect(state => ({
-  name: state.home.name,
-  list: state.home.list
-}))(HomeScreen)
+export default HomeScreen

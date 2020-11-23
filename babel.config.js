@@ -7,6 +7,12 @@ module.exports = function(api) {
         "import", {
         "libraryName": "@ant-design/react-native"
         }
+      ],
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
       ]
     ]
   };
