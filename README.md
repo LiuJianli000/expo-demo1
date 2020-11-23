@@ -38,7 +38,7 @@ yarn：`1.22.4`
 
 #### 导航配置（路由）
 
-使用 [react-navigation 5.0](https://reactnavigation.org/docs/getting-started)
+[react-navigation 5.0](https://reactnavigation.org/docs/getting-started)
 
 配置文件：`src/router.js`
 
@@ -50,7 +50,7 @@ yarn：`1.22.4`
 
 #### UI 框架
 
-`@ant-design/react-native`
+[@ant-design/react-native](https://rn.mobile.ant.design/components/button-cn/)
 
 #### Storage
 

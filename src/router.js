@@ -20,7 +20,7 @@ function OrderNavigator() {
   return (
     <TabStack.Navigator>
       <TabStack.Screen
-        name="order"
+        name="Order"
         component={OrderScreen}
         options={{
           headerTitle: '订单',
@@ -36,7 +36,7 @@ function ProductNavigator() {
   return (
     <TabStack.Navigator>
       <TabStack.Screen
-        name="product"
+        name="Product"
         component={ ProductScreen }
         options={{
           headerTitle: '产品',
@@ -52,7 +52,7 @@ function StoreScreenNavigator() {
   return (
     <TabStack.Navigator>
       <TabStack.Screen
-        name="store"
+        name="Store"
         component={ StoreScreen }
         options={{
           headerTitle: '商店',
@@ -70,34 +70,34 @@ function TabBarNavigator() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
-            case 'index':
+            case 'Index':
               return <AntDesign name="home" size={size} color={color} />
-            case 'order':
+            case 'Order':
               return <AntDesign name="paperclip" size={size} color={color} />
-            case 'product':
+            case 'Product':
               return <AntDesign name="tago" size={size} color={color} />
-            case 'store':
+            case 'Store':
               return <AntDesign name="isv" size={size} color={color} />
           }
         }
       })}>
       <NavTab.Screen
-        name="index"
+        name="Index"
         component={ HomeScreen }
         options={{ title: '主页' }}
       />
       <NavTab.Screen
-        name="order"
+        name="Order"
         component={ OrderNavigator }
         options={{ title: '订单' }}
       />
       <NavTab.Screen
-        name="product"
+        name="Product"
         component={ ProductNavigator }
         options={{ title: '产品' }}
       />
       <NavTab.Screen
-        name="store"
+        name="Store"
         component={ StoreScreenNavigator }
         options={{ title: '商店' }}
       />
@@ -109,7 +109,7 @@ function TabBarNavigator() {
 
 function AppNavigator() {
   return (
-    <AppStack.Navigator initialRouteName="LoginPage">
+    <AppStack.Navigator initialRouteName="Login">
       <AppStack.Screen
         name="Login"
         component={ LoginScreen }
