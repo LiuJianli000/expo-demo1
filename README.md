@@ -52,6 +52,8 @@ yarn：`1.22.4`
 
 [@ant-design/react-native](https://rn.mobile.ant.design/components/button-cn/)
 
+[react-native-vector-icons](https://oblador.github.io/react-native-vector-icons/)
+
 #### Storage
 
 [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage)
