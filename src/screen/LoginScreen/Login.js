@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { Button, Checkbox, InputItem, Icon } from '@ant-design/react-native';
 import { createForm } from 'rc-form'
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 @connect(({ loading }) => ({
-  // loading: loading.effects['login/login'],
+  loading: loading.effects['login/login'],
 }))
 class LoginScreen extends Component {
+  state = {
+    checked: false,
+    domain: '',
+    username: '',
+    password: ''
+  }
+
+  async componentDidMount() {
+    const account = await AsyncStorage.getItem('account')
+    const checked = await AsyncStorage.getItem('checked')
+    const domain = await AsyncStorage.getItem('domain')
+
+    if (account) {
+      this.setState({
+        checked: checked ? JSON.parse(checked) : false,
+        domain,
+        username: JSON.parse(account).username,
+        password: JSON.parse(account).password
+      })
+    }
+  }
+  
   handleSubmit = () => {
-    const { form, dispatch } = this.props
+    const { form, dispatch, navigation } = this.props
+    const { checked } = this.state
 
     form.validateFields(async (errors, values) => {
       if (errors) return
@@ -18,25 +41,56 @@ class LoginScreen extends Component {
       // flytosky.wshopon.com
       // admin@wshopon.com
       // 77LjaaPI
-      AsyncStorage.setItem('domain', values.domain)
+      await AsyncStorage.setItem('domain', values.domain)
+
+      const account = {
+        username: values.username,
+        password: values.password
+      }
 
       dispatch({
         type: 'login/login',
-        payload: {
-          username: values.username,
-          password: values.password
+        payload: { ...account }
+      }).then(res => {
+        if (res.data) {
+          navigation.navigate('Home')
+
+          if (checked) {
+            AsyncStorage.setItem('account', JSON.stringify(account))
+          } else {
+            AsyncStorage.removeItem('account')
+          }
+        } else {
+          console.log(res.response.data)
         }
       })
     })
   }
+
+  handleChecked = e => {
+    const checked = e.target.checked
+
+    this.setState({
+      checked,
+    })
+
+    if (checked) {
+      AsyncStorage.setItem('checked', JSON.stringify(true))
+    } else {
+      AsyncStorage.setItem('checked', JSON.stringify(false))
+    }
+  }
   
   render() {
-    const { getFieldProps, getFieldError, isFieldValidating } = this.props.form
+    const { form, loading } = this.props
+    const { getFieldProps, getFieldError, isFieldValidating } = form
+    const { checked, domain, username, password } = this.state
     
     return (
-      <View style={styles.login}>
+      <ScrollView style={styles.login}>
         <InputItem
           {...getFieldProps('domain', {
+            initialValue: domain,
             rules: [
               {
                 rules: true,
@@ -44,12 +98,13 @@ class LoginScreen extends Component {
               }
             ]
           })}
-          style={{ fontSize: 12 }}     
+          style={{ fontSize: 12 }}
         >
           <Icon name="api" />
         </InputItem>
         <InputItem
           {...getFieldProps('username', {
+            initialValue: username,
             rules: [
               {
                 required: true,
@@ -69,6 +124,7 @@ class LoginScreen extends Component {
         } */}
         <InputItem
           {...getFieldProps('password', {
+            initialValue: password,
             rules: [
               {
                 required: true,
@@ -88,7 +144,7 @@ class LoginScreen extends Component {
           null
         } */}
         <View style={styles.check}>
-          <Checkbox>
+          <Checkbox onChange={this.handleChecked} checked={checked}>
             <Text style={{ fontSize: 12 }}> 记住密码</Text>
           </Checkbox>
         </View>
@@ -96,10 +152,11 @@ class LoginScreen extends Component {
           type="primary"
           onPress={this.handleSubmit} 
           style={{ marginTop: 20, width: '100%', backgroundColor: '#E74D62', borderColor: '#E74D62' }}
+          loading={loading}
         >
           登入
         </Button>
-      </View>
+      </ScrollView>
     );
   }
 };
@@ -108,13 +165,9 @@ export default createForm()(LoginScreen);
 
 const styles = StyleSheet.create({
   login: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: '10%',
-  },
-  form: {
-    width: '70%'
+    paddingTop: '70%',
+    height: '100%',
   },
   input: {
     paddingLeft: 10,

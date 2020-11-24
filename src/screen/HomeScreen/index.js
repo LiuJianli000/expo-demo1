@@ -12,6 +12,11 @@ class HomeScreen extends Component {
   state = {
     sex: ''
   }
+
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem('token')
+    console.log(token)
+  }
   
   render() {
     return (

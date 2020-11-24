@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
-import { View, Text } from 'react-native'
+import { Provider  } from 'react-redux'
+import createLoading from 'dva-loading'
+import App from './router'
 import appModel from './models/app'
 import homeModel from './models/home'
 import loginModel from './models/login'
-import { Provider  } from 'react-redux'
-import App from './router'
 
 import { create } from 'dva-core'
 
@@ -21,6 +21,8 @@ const app = create()
 allModels.forEach((itemModel) => {
   app.model(itemModel)
 })
+
+app.use(createLoading())
 
 app.start()
 
